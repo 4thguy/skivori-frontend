@@ -1,1 +1,19 @@
-<p>games works!</p>
+<h1 class="text-center mb-5">Games</h1>
+
+@if (gamesSignal()) {
+<div class="row">
+  @for (game of gamesSignal(); track $index) {
+  <div class="col-md-4">
+    <app-card-game [game]="game" [additionalClasses]="['mb-4']" />
+  </div>
+  } @empty {
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      No games available.
+    </div>
+  </div>
+  }
+</div>
+} @else {
+<app-loading />
+}
