@@ -16,4 +16,12 @@ export class GamesService {
   getGames(): Observable<Game[]> {
     return this.http.get<Game[]>(`${environment.apiUrl}/data/games`);
   }
+
+  findGames(query: string): Observable<Game[]> {
+    return this.http.post<Game[]>(`${environment.apiUrl}/data/games/find`, {
+      query: query,
+    }, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 }

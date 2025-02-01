@@ -1,8 +1,10 @@
 <h1 class="text-center mb-5">Games</h1>
 
-@if (gamesSignal()) {
+<app-search (onQueryChange)="onQueryChange($event)" />
+
+@if (games) {
 <div class="row">
-  @for (game of gamesSignal(); track $index) {
+  @for (game of games; track $index) {
   <div class="col-md-4">
     <app-card-game [game]="game" [additionalClasses]="['mb-4']" />
   </div>

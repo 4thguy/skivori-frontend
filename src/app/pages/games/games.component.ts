@@ -1,8 +1,8 @@
-import { Component, Signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CardGameComponent } from '../../components/card-game/card-game.component';
 import { LoadingComponent } from '../../components/loading/loading.component';
+import { SearchComponent } from '../../components/search/search.component';
 import { Game } from '../../interfaces/game.interface';
 import { GamesService } from '../../services/games.service';
 
@@ -11,17 +11,46 @@ import { GamesService } from '../../services/games.service';
   imports: [
     CardGameComponent,
     LoadingComponent,
+    SearchComponent,
   ],
   templateUrl: './games.component.html',
   styleUrl: './games.component.scss'
 })
-export class GamesComponent {
+export class GamesComponent implements OnInit, OnDestroy {
 
-  gamesSignal: Signal<Game[] | null>;
+  games: Game[] | null = null;
+  originalGames: Game[] | null = null;
 
-  constructor(private gamesService: GamesService) {
-    const games$: Observable<Game[]> = this.gamesService.getGames();
-    this.gamesSignal = toSignal(games$, { initialValue: null });
+  private subscriptions: Subscription = new Subscription();
+
+  constructor(
+    private gamesService: GamesService,
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.subscriptions.add(this.gamesService
+      .getGames()
+      .subscribe(games => {
+        this.games = games
+        this.originalGames = games;
+      }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  onQueryChange(query: string): void {
+    if (query === '') {
+      this.games = this.originalGames;
+    } else {
+      this.subscriptions.add(this.gamesService
+        .findGames(query)
+        .subscribe(games => {
+          this.games = games
+        }));
+    }
   }
 }
 
