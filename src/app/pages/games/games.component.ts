@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { CardGameComponent } from '../../components/card-game/card-game.component';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { SearchComponent } from '../../components/search/search.component';
+import { FetchStatusEnum } from '../../enum/fetch-status.enum';
 import { Game } from '../../interfaces/game.interface';
 import { GamesService } from '../../services/games.service';
 
@@ -21,6 +22,9 @@ export class GamesComponent implements OnInit, OnDestroy {
   games: Game[] | null = null;
   originalGames: Game[] | null = null;
 
+  status: FetchStatusEnum = FetchStatusEnum.LOADING;
+  STATUS = FetchStatusEnum;
+
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -34,6 +38,7 @@ export class GamesComponent implements OnInit, OnDestroy {
       .subscribe(games => {
         this.games = games
         this.originalGames = games;
+        this.status = FetchStatusEnum.SUCCESS;
       }));
   }
 
@@ -42,15 +47,23 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   onQueryChange(query: string): void {
+    query = query.trim();
     if (query === '') {
       this.games = this.originalGames;
-    } else {
+    } else if (query.length > 2) {
+      this.status = FetchStatusEnum.LOADING;
       this.subscriptions.add(this.gamesService
         .findGames(query)
-        .subscribe(games => {
-          this.games = games
+        .subscribe({
+          next: (games) => {
+            this.games = games;
+            this.status = FetchStatusEnum.SUCCESS;
+          },
+          error: (err) => {
+            console.error('Error fetching games:', err);
+            this.status = FetchStatusEnum.ERROR;
+          }
         }));
     }
   }
 }
-

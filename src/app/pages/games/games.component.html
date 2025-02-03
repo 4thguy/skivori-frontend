@@ -2,6 +2,16 @@
 
 <app-search (onQueryChange)="onQueryChange($event)" />
 
+@switch (status) {
+@case (STATUS.LOADING) {
+<app-loading />
+}
+@case (STATUS.ERROR) {
+<div class="alert alert-warn text-center">
+  An error occurred while loading the games.
+</div>
+}
+@case (STATUS.SUCCESS) {
 @if (games) {
 <div class="row">
   @for (game of games; track $index) {
@@ -16,6 +26,6 @@
   </div>
   }
 </div>
-} @else {
-<app-loading />
+}
+}
 }
