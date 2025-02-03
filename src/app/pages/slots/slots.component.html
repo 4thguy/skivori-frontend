@@ -1,0 +1,21 @@
+<h1>Slots</h1>
+<div class="container-sm">
+  @if (data) {
+  <div class="row">
+    @for (slot of data.result; track $index) {
+    <div class="col-md-4 mb-3 text-center">
+      <div class="slot slot-{{ slot }}"></div>
+    </div>
+    }
+  </div>
+  <div class="text-center mb-3">
+    <h2>Credit: {{ data.credits }}</h2>
+  </div>
+  <div class="text-center mb-3">
+    <button type="button" class="btn btn-primary" (click)="onClickPlay()" [disabled]="data.credits === 0">Play
+      Now</button>
+  </div>
+  } @else {
+  <app-loading />
+  }
+</div>

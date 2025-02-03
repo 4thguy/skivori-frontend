@@ -1,0 +1,27 @@
+.slot {
+  font-size: 60px;
+
+  &-cherry {
+    &:before {
+      content: '🍒';
+    }
+  }
+
+  &-apple {
+    &:before {
+      content: '🍎';
+    }
+  }
+
+  &-banana {
+    &:before {
+      content: '🍌';
+    }
+  }
+
+  &-lemon {
+    &:before {
+      content: '🍋';
+    }
+  }
+}
