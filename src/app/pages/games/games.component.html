@@ -14,7 +14,7 @@
 @case (STATUS.SUCCESS) {
 @if (games) {
 <div class="row">
-  @for (game of games; track $index) {
+  @for (game of games.data; track $index) {
   <div class="col-md-4">
     <app-card-game [game]="game" [additionalClasses]="['mb-4']" />
   </div>
@@ -26,6 +26,8 @@
   </div>
   }
 </div>
+<app-pagination [currentPage]="games.currentPage" [totalPages]="games.totalPages"
+  (onPageChange)="onPageChange($event)" />
 }
 }
 }
