@@ -13,7 +13,12 @@
               ariaCurrentWhenActive="page" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a routerLink="/games" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">Games</a>
+            <a routerLink="/games" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+              ariaCurrentWhenActive="page" class="nav-link">Games</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/games/slots" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+              ariaCurrentWhenActive="page" class="nav-link">Slots</a>
           </li>
         </ul>
       </div>
