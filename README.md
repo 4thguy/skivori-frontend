@@ -1,5 +1,28 @@
 # SkivoriFrontend
 
+## Tools Used
+
+* Visual Studio Code
+* VSC Extension: Continue (https://docs.continue.dev/) with local LLM server
+* Continue Settings 
+```
+  "models": [
+    {
+      "title": "Llama 3.2 Latest",
+      "provider": "ollama",
+      "model": "llama3.2:latest"
+    },
+  ],
+  "tabAutocompleteModel": {
+    "title": "Qwen2.5-Coder 3B",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b"
+  },
+```
+* Angular Scaffolding CLI
+* ChatGPT for debugging help
+* ChatGPT to transform JSON to TypeScript interfaces
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
 
 ## Development server
