@@ -7,16 +7,17 @@
   @if (data) {
   <script src="https://gist.github.com/ibrahimhajjaj/a0e39e7330aebf0feb49912f1bf9062f.js"></script>
   <div class="row">
-    <div class="col-6">
-      <ul>
-        <li>1 EUR</li>
+    <div class="col-md-6">
+      <ul class="list-unstyled">
+        <li><strong>1 EUR</strong></li>
       </ul>
     </div>
-    <div class="col-6">
-      <ul>
-        @for(keypar of data|keyvalue; track keypar.key) {
-        <!-- two decial places -->
-        <li>{{ keypar.key }}: {{ keypar.value }}</li>
+    <div class="col-md-6">
+      <ul class="list-unstyled">
+        @for (keypar of data | keyvalue; track keypar.key) {
+        <li>
+          <strong>{{ keypar.key }}:</strong>&nbsp;{{ keypar.value }}
+        </li>
         }
       </ul>
     </div>
