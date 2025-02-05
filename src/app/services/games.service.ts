@@ -14,10 +14,21 @@ export class GamesService {
     public http: HttpClient,
   ) { }
 
+  /*
+  * Retrieves a list of games from the API.
+  * @param page - The page number to retrieve.
+  * @returns An Observable that emits the list of games.
+  */
   getGames(page: number = 1): Observable<Paged<Game>> {
     return this.http.get<Paged<Game>>(`${environment.apiUrl}/data/games?page=${page}`);
   }
 
+  /*
+  * Searches for games based on a query string and retrieves the results.
+  * @param query - The search query to use.
+  * @param page - The page number to retrieve.
+  * @returns An Observable that emits the list of games matching the query.
+  */
   findGames(query: string, page: number = 1): Observable<Paged<Game>> {
     const search = query.toLowerCase().trim();
 
