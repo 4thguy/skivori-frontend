@@ -6,7 +6,7 @@
     "start": "ng serve --configuration development",
     "watch": "ng build --watch --configuration development",
     "build": "ng build --configuration production",
-    "deploy": "aws s3 sync ./dist/skivori-frontend/browser s3://skivori-frontend --delete",
+    "deploy": "aws s3 sync ./dist/skivori-frontend/browser s3://skivori-angular --delete",
     "test": "ng test"
   },
   "private": true,
